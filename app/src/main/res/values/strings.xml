@@ -1,6 +1,7 @@
 <resources>
-    <string name="app_name">Projeto Firebase 3</string>
+    <string name="app_name">Suporte Técnico</string>
     <string name="entrar">Entrar</string>
     <string name="text_cadastro">Crie uma conta clicando aqui</string>
     <string name="title_cadastro">Cadastre-se</string>
+    <string name="containerUser">Proxima Tela</string>
 </resources>

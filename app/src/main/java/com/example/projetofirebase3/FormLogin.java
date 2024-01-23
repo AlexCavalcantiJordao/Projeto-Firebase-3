@@ -1,6 +1,5 @@
 package com.example.projetofirebase3;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -26,7 +25,7 @@ public class FormLogin extends AppCompatActivity {
     private EditText edit_email, edit_senha;
     private Button bt_entrar;
     private ProgressBar progressBar;
-    String[] mensagens = {"Preencha todos os campos", "Login efetuado com sucesso"};
+    String[] mensagens = {"Preencha todos os campos"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,7 +66,7 @@ public class FormLogin extends AppCompatActivity {
 
         FirebaseAuth.getInstance().signInWithEmailAndPassword(email, senha).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
+            public void onComplete(Task<AuthResult> task) {
 
                 if (task.isSuccessful()) {
                     progressBar.setVisibility(View.VISIBLE);
@@ -75,9 +74,9 @@ public class FormLogin extends AppCompatActivity {
                     new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            TelaPrincipal();
+                            RegistraChamado();
                         }
-                    }, 3000);
+                    }, 2000);
                 } else {
                     String erro;
 
@@ -96,20 +95,21 @@ public class FormLogin extends AppCompatActivity {
 
     }
 
-    // Vai na Tela Principal
+    // Vai na Tela Principal. Quero mudar para RegistraChamado
     @Override
     protected void onStart() {
         super.onStart();
 
         FirebaseUser usuarioAtual = FirebaseAuth.getInstance().getCurrentUser();
 
-        if (usuarioAtual != null){
-            TelaPrincipal();
+        if (usuarioAtual != null) {
+            RegistraChamado();
         }
     }
 
-    private void TelaPrincipal() {
-        Intent intent = new Intent(FormLogin.this, TelaPrincipal.class);
+    // Vou tirar a TelaPrincipal e colocar o RegistrarChamado. E também está especificando quando vai Registrar o chamado...
+    private void RegistraChamado() {
+        Intent intent = new Intent(FormLogin.this, RegistraChamado.class);
         startActivity(intent);
         finish();
     }

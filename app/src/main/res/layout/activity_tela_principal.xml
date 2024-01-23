@@ -26,6 +26,8 @@
         app:layout_constraintStart_toStartOf="@id/containerUser"
         app:layout_constraintTop_toTopOf="@id/containerUser" />
 
+
+
     <ImageView
         android:id="@+id/iconeUser"
         android:layout_width="50dp"

@@ -1,6 +1,6 @@
 package com.example.projetofirebase3;
 
-import androidx.annotation.NonNull;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.graphics.Color;
@@ -10,7 +10,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.example.projetofirebase3.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -29,8 +28,10 @@ import java.util.Map;
 
 public class FormCadastro extends AppCompatActivity {
 
-    private EditText edit_nome, edit_email, edit_senha;
-    private Button bt_cadastrar;
+    private EditText edit_nome, edit_email, edit_senha, edit_cpf, edit_matricula;
+    private Button bt_cadastrar, btAgendar;
+
+    private Button bt_telaprincipal;
     String[] mensagens = {"Preencha todos os campos", "Cadastro realizado com sucesso"};
     String usuarioID;
 
@@ -48,8 +49,11 @@ public class FormCadastro extends AppCompatActivity {
                 String nome = edit_nome.getText().toString();
                 String email = edit_email.getText().toString();
                 String senha = edit_senha.getText().toString();
+                String cpf = edit_cpf.getText().toString();
+                String matricula = edit_matricula.getText().toString();
 
-                if (nome.isEmpty() || email.isEmpty() || senha.isEmpty()) {
+
+                if (nome.isEmpty() || email.isEmpty() || senha.isEmpty() || cpf.isEmpty() || matricula.isEmpty()) {
                     Snackbar snackbar = Snackbar.make(v, mensagens[0], Snackbar.LENGTH_SHORT);
                     snackbar.setBackgroundTint(Color.WHITE);
                     snackbar.setTextColor(Color.BLACK);
@@ -65,10 +69,13 @@ public class FormCadastro extends AppCompatActivity {
     private void CadastrarUsuario(View v) {
         String email = edit_email.getText().toString();
         String senha = edit_senha.getText().toString();
+        String cpf = edit_cpf.getText().toString();
+        String matricula = edit_matricula.getText().toString();
+
 
         FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, senha).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
+            public void onComplete(Task<AuthResult> task) {
                 if (task.isSuccessful()) {
 
                     SalvarDadosUsuario();
@@ -116,7 +123,7 @@ public class FormCadastro extends AppCompatActivity {
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
-                    public void onFailure(@NonNull Exception e) {
+                    public void onFailure(Exception e) {
                         Log.d("db_error", "Erro ao salvar os dados" + e.toString());
 
                     }
@@ -127,6 +134,8 @@ public class FormCadastro extends AppCompatActivity {
         edit_nome = findViewById(R.id.edit_nome);
         edit_email = findViewById(R.id.edit_email);
         edit_senha = findViewById(R.id.edit_senha);
-        bt_cadastrar = findViewById(R.id.bt_cadastrar);
+        edit_cpf = findViewById(R.id.edit_cpf);
+        edit_matricula = findViewById(R.id.edit_matricula);
+        bt_cadastrar = findViewById(R.id.bt_proximo);
     }
 }
