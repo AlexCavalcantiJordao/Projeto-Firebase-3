@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class RegistraChamado extends AppCompatActivity {
@@ -27,20 +28,20 @@ public class RegistraChamado extends AppCompatActivity {
 
         IniciarComponentes();
 
+        // O erro está no AGENDAMENTO que está saindo do aplicativo
         bt_proximo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FirebaseAuth.getInstance().signOut();
-                // Aqui vou mudar de FormCadastro para a TelaPrincipal, aonde que vai no final da conta para DESLOGAR do aplicativo...
-                Intent intent = new Intent(RegistraChamado.this, Agendamento.class);
+                Intent intent = new Intent(RegistraChamado.this, com.example.projetofirebase3.Agendamento.class);
                 startActivity(intent);
-                finish();
             }
         });
     }
 
     // Aqui está o erro. Tem que criar outra tela para colocar para Transferir os Dias / Horas marcadas.
     private void IniciarComponentes() {
+
+        Agendamento = findViewById(R.id.bt_proximo);
 
         bt_proximo = findViewById(R.id.bt_proximo);
     }

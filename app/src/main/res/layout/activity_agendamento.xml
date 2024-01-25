@@ -45,7 +45,7 @@
             android:id="@+id/datePicket"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white"
+            android:background="@color/Blue"
             android:calendarViewShown="false"
             android:datePickerMode="spinner" />
 
@@ -70,7 +70,7 @@
             android:id="@+id/timePicker"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white"
+            android:background="@color/Blue"
             android:timePickerMode="spinner" />
 
         <TextView

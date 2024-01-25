@@ -34,7 +34,7 @@
     <EditText
         android:id="@+id/edit_nomePessoa"
         style="@style/Edit_Text"
-        android:hint="Nome do Funcionário"
+        android:hint="Nome do Funcionário:"
         android:inputType="text"
         android:textColor="@color/black"
         android:textColorHint="@color/black"
@@ -46,7 +46,7 @@
         android:id="@+id/edit_nomeSetor"
         style="@style/Edit_Text"
         android:layout_marginTop="77dp"
-        android:hint="Nome do Setor"
+        android:hint="Nome do Setor:"
         android:inputType="text"
         android:textColor="@color/black"
         android:textColorHint="@color/black"
@@ -59,7 +59,7 @@
         android:id="@+id/edit_siglaSetor"
         style="@style/Edit_Text"
         android:layout_marginTop="9dp"
-        android:hint="Sigla do Setor"
+        android:hint="Sigla do Setor:"
         android:inputType="text"
         android:textColor="@color/black"
         android:textColorHint="@color/black"
@@ -69,10 +69,10 @@
         app:layout_constraintTop_toBottomOf="@id/edit_nomeSetor" />
 
     <EditText
-        android:id="@+id/edit_funcao"
+        android:id="@+id/edit_problema"
         style="@style/Edit_Text"
         android:layout_marginTop="9dp"
-        android:hint="Função"
+        android:hint="Problema:"
         android:inputType="text"
         android:textColor="@color/black"
         android:textColorHint="@color/black"
@@ -85,27 +85,27 @@
         android:id="@+id/edit_material"
         style="@style/Edit_Text"
         android:layout_marginTop="84dp"
-        android:hint="Quais materiais que precisa"
+        android:hint="Quais materiais que precisa:"
         android:inputType="text"
         android:textColor="@color/black"
         android:textColorHint="@color/black"
         app:layout_constraintEnd_toEndOf="@id/containerComponents"
         app:layout_constraintHorizontal_bias="0.896"
         app:layout_constraintStart_toStartOf="@id/containerComponents"
-        app:layout_constraintTop_toBottomOf="@id/edit_funcao" />
+        app:layout_constraintTop_toBottomOf="@id/edit_problema" />
 
     <EditText
         android:id="@+id/edit_quantidade"
         style="@style/Edit_Text"
         android:layout_marginTop="9dp"
-        android:hint="Informal quantidade de material"
+        android:hint="Informal quantidade de material:"
         android:inputType="number"
         android:textColor="@color/black"
         android:textColorHint="@color/black"
         app:layout_constraintEnd_toEndOf="@id/containerComponents"
         app:layout_constraintHorizontal_bias="0.499"
         app:layout_constraintStart_toStartOf="@id/containerComponents"
-        app:layout_constraintTop_toBottomOf="@id/edit_funcao" />
+        app:layout_constraintTop_toBottomOf="@id/edit_problema" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/bt_finaliza"
@@ -115,7 +115,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.3"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/edit_funcao" />
+        app:layout_constraintTop_toBottomOf="@id/edit_problema" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/bt_proximo"
