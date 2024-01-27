@@ -29,7 +29,7 @@ import java.util.Map;
 public class FormCadastro extends AppCompatActivity {
 
     private EditText edit_nome, edit_email, edit_senha, edit_cpf, edit_matricula;
-    private Button bt_cadastrar, btAgendar;
+    private Button bt_cadastrar;
 
     private Button bt_telaprincipal;
     String[] mensagens = {"Preencha todos os campos", "Cadastro realizado com sucesso"};
@@ -79,10 +79,6 @@ public class FormCadastro extends AppCompatActivity {
 
                     SalvarDadosUsuario();
 
-                    Snackbar snackbar = Snackbar.make(v, mensagens[1], Snackbar.LENGTH_SHORT);
-                    snackbar.setBackgroundTint(Color.WHITE);
-                    snackbar.setTextColor(Color.BLACK);
-                    snackbar.show();
                 } else {
                     String erro;
                     try {
