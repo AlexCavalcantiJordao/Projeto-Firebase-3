@@ -126,11 +126,11 @@ public class FormCadastro extends AppCompatActivity {
     }
 
     private void IniciarComponentes() {
-        edit_nome = findViewById(R.id.edit_nome);
-        edit_email = findViewById(R.id.edit_email);
-        edit_senha = findViewById(R.id.edit_senha);
-        edit_cpf = findViewById(R.id.edit_cpf);
-        edit_matricula = findViewById(R.id.edit_matricula);
-        bt_cadastrar = findViewById(R.id.bt_proximo);
+        edit_nome = findViewById(R.id.edit_nome); // 1
+        edit_email = findViewById(R.id.edit_email); // 2
+        edit_senha = findViewById(R.id.edit_senha); // 3
+        edit_cpf = findViewById(R.id.edit_cpf); // 4
+        edit_matricula = findViewById(R.id.edit_matricula); // 5
+        bt_cadastrar = findViewById(R.id.bt_proximo); // 6
     }
 }

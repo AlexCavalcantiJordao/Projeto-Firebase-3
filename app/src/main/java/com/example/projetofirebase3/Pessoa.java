@@ -11,11 +11,11 @@ public class Pessoa {
     private int senha;
     private int quantidade;
 
-    public Pessoa(String nomePessoa, String nomeSetor, String siglaSetor, String material, String problema, String quantidade, String email, String senha) {
+    public Pessoa(String nomePessoa, String nomeSetor, String siglaSetor, String material, String problema, String quantidade) {
 
     }
 
-    public Pessoa(String nomePessoa, String nomeSetor, String siglaSetor, String material, String problema, String email, int senha, int quantidade) {
+    public Pessoa(String nomePessoa, String nomeSetor, String siglaSetor, String material, String problema, int quantidade) {
 
         this.nomePessoa = nomePessoa;
         this.nomeSetor = nomeSetor;
@@ -23,8 +23,6 @@ public class Pessoa {
         this.material = material;
         this.problema = problema;
         this.quantidade = quantidade;
-        this.email = email;
-        this.senha = senha;
     }
 
     public String getNomePessoa() {
@@ -41,14 +39,6 @@ public class Pessoa {
 
     String getMaterial() {
         return material;
-    }
-
-    String getEmail() {
-        return email;
-    }
-
-    public int getSenha() {
-        return senha;
     }
 
     public int getQuantidade() {

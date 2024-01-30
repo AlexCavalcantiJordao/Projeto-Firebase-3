@@ -15,8 +15,6 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
@@ -25,22 +23,19 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
+
 import java.util.HashMap;
 import java.util.Map;
 
 public class RegistraChamado extends AppCompatActivity {
 
-
     private Button bt_finaliza, bt_proximo;
-
     private EditText edit_nomePessoa, edit_nomeSetor, edit_siglaSetor, edit_problema, edit_material, edit_quantidade, edit_nome, edit_email, edit_senha;
     private DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("pessoas");
-
     String[] mensagens = {"Preencha todos os campos.", "Cadastro realizado com sucesso."};
-
     String usuarioID;
 
-    // Essa parte aqui que não estou conseguindo logar para outra tela TelaPrincipal...
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,7 +43,7 @@ public class RegistraChamado extends AppCompatActivity {
 
         IniciarComponentes();
 
-        // Aqui vai para outra tela de AGENDAR para fazer a manutenção dos PC´s. E também escolher os TÉCNICOS.
+        // Aqui que vai para outra tela de "AGENDAMENTO".
         bt_proximo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -57,6 +52,7 @@ public class RegistraChamado extends AppCompatActivity {
             }
         });
 
+        // Aqui que vai finalizar o pedido de manutenção na máquina "Computador"....
         bt_finaliza.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -66,10 +62,8 @@ public class RegistraChamado extends AppCompatActivity {
                 String material = edit_material.getText().toString();
                 String problema = edit_problema.getText().toString();
                 String quantidade = edit_quantidade.getText().toString();
-                String email = edit_quantidade.getText().toString();
-                String senha = edit_quantidade.getText().toString();
 
-                if (email.isEmpty() || senha.isEmpty() || nomePessoa.isEmpty() || nomeSetor.isEmpty() || siglaSetor.isEmpty() || material.isEmpty() || problema.isEmpty() || quantidade.isEmpty()) {
+                if (nomePessoa.isEmpty() || nomeSetor.isEmpty() || siglaSetor.isEmpty() || material.isEmpty() || problema.isEmpty() || quantidade.isEmpty()) {
                     Snackbar snackbar = Snackbar.make(v, mensagens[0], Snackbar.LENGTH_SHORT);
                     snackbar.setBackgroundTint(Color.WHITE);
                     snackbar.setTextColor(Color.BLACK);
@@ -81,6 +75,7 @@ public class RegistraChamado extends AppCompatActivity {
         });
     }
 
+    // Aqui vai salvar os dados do usuário...
     private void CadastrarUsuario(View v) {
         String nomePessoa = edit_nomePessoa.getText().toString();
         String nomeSetor = edit_nomeSetor.getText().toString();
@@ -88,15 +83,15 @@ public class RegistraChamado extends AppCompatActivity {
         String material = edit_material.getText().toString();
         String problema = edit_problema.getText().toString();
         String quantidade = edit_quantidade.getText().toString();
-        String email = edit_quantidade.getText().toString();
-        String senha = edit_quantidade.getText().toString();
 
-        String CadastrarUsuario = databaseReference.push().getKey();
-        Pessoa pessoa = new Pessoa(nomePessoa, nomeSetor, siglaSetor, material, problema, quantidade, email, senha);
+        // Criar um ID único para a pessoa no Firebase
+        String usuarioID = databaseReference.push().getKey();
 
-        FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, senha).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+        Pessoa pessoa = new Pessoa(nomePessoa, nomeSetor, siglaSetor, material, problema, quantidade);
+
+        databaseReference.child(usuarioID).setValue(pessoa).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
-            public void onComplete(Task<AuthResult> task) {
+            public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {
 
                     SalvarDadosUsuario();
@@ -124,12 +119,16 @@ public class RegistraChamado extends AppCompatActivity {
     }
 
     private void SalvarDadosUsuario() {
+        String nomePessoa = edit_nomePessoa.getText().toString();
+        String nomeSetor = edit_nomeSetor.getText().toString();
+        String siglaSetor = edit_siglaSetor.getText().toString();
+        String material = edit_material.getText().toString();
+        String problema = edit_problema.getText().toString();
+        String quantidade = edit_quantidade.getText().toString();
         String nome = edit_nome.getText().toString();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         Map<String, Object> usuarios = new HashMap<>();
-        usuarios.put("nome", nome);
-
-        usuarioID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        usuarios.put("nome, nomePessoa, setor, sigla, material, problema, quantidade", nome + nomePessoa + nomeSetor + siglaSetor + material + problema + quantidade);
 
         DocumentReference documentReference = db.collection("Usuários").document(usuarioID);
         documentReference.set(usuarios).addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -147,7 +146,6 @@ public class RegistraChamado extends AppCompatActivity {
                 });
     }
 
-    // Aqui que com problema....
     private void IniciarComponentes() {
         edit_nomePessoa = findViewById(R.id.edit_nomePessoa);
         edit_quantidade = findViewById(R.id.edit_quantidade);
