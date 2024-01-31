@@ -25,7 +25,7 @@ public class FormLogin extends AppCompatActivity {
     private EditText edit_email, edit_senha;
     private Button bt_entrar;
     private ProgressBar progressBar;
-    String[] mensagens = {"Preencha todos os campos"};
+    String[] mensagens = {"Preencha todos os campos", "Cadastro realizado com sucesso."};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

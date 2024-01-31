@@ -7,15 +7,13 @@ public class Pessoa {
     private String siglaSetor;
     private String material;
     private String problema;
-    private String email;
-    private int senha;
-    private int quantidade;
+    private String quantidade;
 
-    public Pessoa(String nomePessoa, String nomeSetor, String siglaSetor, String material, String problema, String quantidade) {
+    public Pessoa() {
 
     }
 
-    public Pessoa(String nomePessoa, String nomeSetor, String siglaSetor, String material, String problema, int quantidade) {
+    public Pessoa(String nomePessoa, String nomeSetor, String siglaSetor, String material, String problema, String quantidade) {
 
         this.nomePessoa = nomePessoa;
         this.nomeSetor = nomeSetor;
@@ -41,7 +39,7 @@ public class Pessoa {
         return material;
     }
 
-    public int getQuantidade() {
+    public String getQuantidade() {
         return quantidade;
     }
 }

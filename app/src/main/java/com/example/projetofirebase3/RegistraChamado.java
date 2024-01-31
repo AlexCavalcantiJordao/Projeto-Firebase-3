@@ -15,24 +15,31 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.annotation.Nullable;
+
 public class RegistraChamado extends AppCompatActivity {
 
     private Button bt_finaliza, bt_proximo;
-    private EditText edit_nomePessoa, edit_nomeSetor, edit_siglaSetor, edit_problema, edit_material, edit_quantidade, edit_nome, edit_email, edit_senha;
+    private EditText edit_nomePessoa, edit_nomeSetor, edit_siglaSetor, edit_problema, edit_material, edit_quantidade, edit_nome;
     private DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("pessoas");
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
     String[] mensagens = {"Preencha todos os campos.", "Cadastro realizado com sucesso."};
     String usuarioID;
 
@@ -56,6 +63,7 @@ public class RegistraChamado extends AppCompatActivity {
         bt_finaliza.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                FirebaseAuth.getInstance().signOut();
                 String nomePessoa = edit_nomePessoa.getText().toString();
                 String nomeSetor = edit_nomeSetor.getText().toString();
                 String siglaSetor = edit_siglaSetor.getText().toString();
@@ -74,6 +82,26 @@ public class RegistraChamado extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        String pessoa = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+        usuarioID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+        DocumentReference documentReference = db.collection("Usuários").document(usuarioID);
+        documentReference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException error) {
+                if (documentSnapshot != null) {
+                    edit_nomePessoa.setText(documentSnapshot.getString("nome"));
+                    edit_nomePessoa.setText(pessoa);
+                }
+            }
+        });
+    }
+
 
     // Aqui vai salvar os dados do usuário...
     private void CadastrarUsuario(View v) {
@@ -101,13 +129,13 @@ public class RegistraChamado extends AppCompatActivity {
                     try {
                         throw task.getException();
                     } catch (FirebaseAuthWeakPasswordException e) {
-                        erro = "Preenchas todas as tabelas.";
+                        erro = "Digite uma senha com o mínimo 6 caracteres";
                     } catch (FirebaseAuthUserCollisionException e) {
-                        erro = "Faltam algumas tabelas oara preencher.";
+                        erro = "Esta conta já foi cadastrada";
                     } catch (FirebaseAuthInvalidCredentialsException e) {
-                        erro = "Preencha, POR FAVOR !";
+                        erro = "E-mail inválido";
                     } catch (Exception e) {
-                        erro = "Erro ao não preencher todas as tabelas.";
+                        erro = "Erro ao cadastrar usuário";
                     }
                     Snackbar snackbar = Snackbar.make(v, erro, Snackbar.LENGTH_SHORT);
                     snackbar.setBackgroundTint(Color.WHITE);
@@ -128,7 +156,7 @@ public class RegistraChamado extends AppCompatActivity {
         String nome = edit_nome.getText().toString();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         Map<String, Object> usuarios = new HashMap<>();
-        usuarios.put("nome, nomePessoa, setor, sigla, material, problema, quantidade", nome + nomePessoa + nomeSetor + siglaSetor + material + problema + quantidade);
+        usuarios.put("nome, nomePessoa, nomeSetor, setor, sigla, material, problema, quantidade", nome + nomePessoa + nomeSetor + siglaSetor + material + problema + quantidade);
 
         DocumentReference documentReference = db.collection("Usuários").document(usuarioID);
         documentReference.set(usuarios).addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -147,6 +175,7 @@ public class RegistraChamado extends AppCompatActivity {
     }
 
     private void IniciarComponentes() {
+        edit_nome = findViewById(R.id.edit_nome);
         edit_nomePessoa = findViewById(R.id.edit_nomePessoa);
         edit_quantidade = findViewById(R.id.edit_quantidade);
         edit_siglaSetor = findViewById(R.id.edit_siglaSetor);
