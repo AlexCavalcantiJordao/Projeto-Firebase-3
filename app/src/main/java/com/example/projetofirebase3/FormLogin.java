@@ -25,7 +25,7 @@ public class FormLogin extends AppCompatActivity {
     private EditText edit_email, edit_senha;
     private Button bt_entrar;
     private ProgressBar progressBar;
-    String[] mensagens = {"Preencha todos os campos"};
+    String[] mensagens = {"Preencha todos os campos.", "O usuário foi logado."};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +55,11 @@ public class FormLogin extends AppCompatActivity {
                     snackbar.show();
                 } else {
                     AutenticarUsuario(v);
+
+                    Snackbar snackbar = Snackbar.make(v, mensagens[1], Snackbar.LENGTH_SHORT);
+                    snackbar.setBackgroundTint(Color.WHITE);
+                    snackbar.setTextColor(Color.BLACK);
+                    snackbar.show();
                 }
             }
         });

@@ -1,4 +1,4 @@
-package com.example.projetofirebase3;
+package com.example.projetofirebase3.view;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -10,14 +10,16 @@ import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.projetofirebase3.view.Agendamento;
+import com.example.projetofirebase3.Pessoa;
+import com.example.projetofirebase3.R;
+import com.example.projetofirebase3.RegistraChamado;
+import com.example.projetofirebase3.Servico;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
@@ -28,40 +30,48 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.annotation.Nullable;
 
-public class RegistraChamado extends AppCompatActivity {
-    private Button bt_finaliza, bt_proximo;
-    private EditText edit_nomePessoa, edit_nomeSetor, edit_siglaSetor, edit_problema, edit_material, edit_quantidade;
-    private DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("pessoas");
+public class Agendamento extends AppCompatActivity {
+   /* private Button bt_agendar, bt_seguinte;
+
+    private EditText edit_data, edit_hora, edit_profissional, edit_tecnico1, edit_tecnico2, edit_tecnico3, edit_dia, edit_mes, edit_nome;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
-    String[] mensagens = {"Preencha todos os campos.", "O chamado foi finalizado com sucesso."};
-    String usuarioID;
+    private DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("agenda");
+    private Calendar calendar = Calendar.getInstance();
+    private String data = "";
+    private String hora = "";
+    private String year = "";
+    private Integer monthOfYear = Integer.valueOf("");
+    private Integer dayOfMonth = Integer.valueOf("");
+    String[] mensagens = {"Preencha todos os campos.", "Foi agendado com sucesso."};
+    String usuarioID;*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_registra_chamado);
+        setContentView(R.layout.activity_agendamento);
 
-        IniciarComponentes();
-        //mAuth = FirebaseAuth.getInstance();
+        /*IniciarComponentes();
+
         // Aqui que vai para outra tela de "AGENDAMENTO".
-        bt_proximo.setOnClickListener(new View.OnClickListener() {
+        bt_seguinte.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(RegistraChamado.this, Agendamento.class);
+                Intent intent = new Intent(Agendamento.this, Servico.class);
                 startActivity(intent);
             }
         });
 
         // Aqui que vai finalizar o pedido de manutenção na máquina "Computador"....
-        bt_finaliza.setOnClickListener(new View.OnClickListener() {
+        bt_agendar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FirebaseAuth.getInstance().signOut();
+                //FirebaseAuth.getInstance().signOut();
                 String nomePessoa = edit_nomePessoa.getText().toString(); // 1
                 String nomeSetor = edit_nomeSetor.getText().toString(); // 2
                 String siglaSetor = edit_siglaSetor.getText().toString(); // 3
@@ -92,7 +102,6 @@ public class RegistraChamado extends AppCompatActivity {
 
         String pessoa = FirebaseAuth.getInstance().getCurrentUser().getEmail();
         usuarioID = FirebaseAuth.getInstance().getCurrentUser().getUid();
-       // FirebaseUser currentUser = mAuth.getCurrentUser();
 
         DocumentReference documentReference = db.collection("Usuários").document(usuarioID);
         documentReference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
@@ -176,13 +185,8 @@ public class RegistraChamado extends AppCompatActivity {
 
     // Aqui que inicia tudo, as telas como foi criadas e até o fim....
     private void IniciarComponentes() {
-        edit_nomePessoa = findViewById(R.id.edit_nomePessoa);
-        edit_nomeSetor = findViewById(R.id.edit_nomeSetor);
-        edit_siglaSetor = findViewById(R.id.edit_siglaSetor);
-        edit_quantidade = findViewById(R.id.edit_quantidade);
-        edit_material = findViewById(R.id.edit_material);
-        edit_problema = findViewById(R.id.edit_problema);
-        bt_proximo = findViewById(R.id.bt_proximo);
-        bt_finaliza = findViewById(R.id.bt_finaliza);
+
+        bt_seguinte = findViewById(R.id.seguinte);
+        bt_agendar = findViewById(R.id.bt_agendar);*/
     }
 }

@@ -12,7 +12,7 @@
         android:layout_height="match_parent"
         android:background="@drawable/background"
         android:orientation="vertical"
-        tools:context=".Agendamento">
+        tools:context=".view.Agendamento">
 
         <TextView
             android:layout_width="match_parent"
@@ -45,7 +45,7 @@
             android:id="@+id/datePicket"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/Blue"
+            android:background="@color/white"
             android:calendarViewShown="false"
             android:datePickerMode="spinner" />
 
@@ -70,7 +70,7 @@
             android:id="@+id/timePicker"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/Blue"
+            android:background="@color/white"
             android:timePickerMode="spinner" />
 
         <TextView
@@ -92,7 +92,7 @@
 
 
             <CheckBox
-                android:id="@+id/tecnico1"
+                android:id="@+id/barbeiro2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="false" />
@@ -117,7 +117,7 @@
 
 
             <CheckBox
-                android:id="@+id/tecnico2"
+                android:id="@+id/barbeiro1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="false" />
@@ -142,7 +142,7 @@
 
 
             <CheckBox
-                android:id="@+id/tecnico3"
+                android:id="@+id/barbeiro3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="false" />
@@ -150,7 +150,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Lian Cavalcanti"
+                android:text="Junior Pressato"
                 android:textColor="@color/white"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -167,6 +167,7 @@
             android:textSize="18sp"
             android:textStyle="bold"
             app:cornerRadius="15dp" />
+
 
     </LinearLayout>
 </ScrollView>

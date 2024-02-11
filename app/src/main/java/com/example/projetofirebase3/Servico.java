@@ -1,14 +1,14 @@
 package com.example.projetofirebase3;
 
-import android.os.Bundle;
-
 import androidx.appcompat.app.AppCompatActivity;
 
-public class Agendamento extends AppCompatActivity {
+import android.os.Bundle;
+
+public class Servico extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_agendamento);
+        setContentView(R.layout.activity_servico);
     }
 }
