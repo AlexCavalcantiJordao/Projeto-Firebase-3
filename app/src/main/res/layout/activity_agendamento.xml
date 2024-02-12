@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/background"
@@ -21,7 +21,7 @@
             android:gravity="center"
             android:text="Agendamento"
             android:textColor="@color/white"
-            android:textSize="25sp"
+            android:textSize="42sp"
             android:textStyle="bold" />
 
         <androidx.cardview.widget.CardView
@@ -30,6 +30,7 @@
             app:cardBackgroundColor="@color/black">
 
             <TextView
+                android:id="@+id/text_data"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
@@ -45,7 +46,7 @@
             android:id="@+id/datePicket"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white"
+            android:background="@color/cardview_dark_background"
             android:calendarViewShown="false"
             android:datePickerMode="spinner" />
 
@@ -55,6 +56,7 @@
             app:cardBackgroundColor="@color/black">
 
             <TextView
+                android:id="@+id/text_hora"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
@@ -70,16 +72,17 @@
             android:id="@+id/timePicker"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white"
+            android:background="@color/cardview_dark_background"
             android:timePickerMode="spinner" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
+            android:gravity="center"
             android:text="Escolha um profissional"
             android:textColor="@color/white"
-            android:textSize="18sp"
+            android:textSize="25sp"
             android:textStyle="bold" />
 
         <LinearLayout
@@ -91,18 +94,19 @@
             android:orientation="horizontal">
 
 
-            <CheckBox
-                android:id="@+id/barbeiro2"
+            <RadioButton
+                android:id="@+id/tecnico1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="false" />
 
             <TextView
+                android:id="@+id/text_nomeTecnico1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Alex Fonseca"
-                android:textColor="@color/white"
-                android:textSize="18sp"
+                android:textColor="@color/material_dynamic_secondary99"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
         </LinearLayout>
@@ -116,18 +120,19 @@
             android:orientation="horizontal">
 
 
-            <CheckBox
-                android:id="@+id/barbeiro1"
+            <RadioButton
+                android:id="@+id/tecnico2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="false" />
 
             <TextView
+                android:id="@+id/text_nomeTecnico2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Pedro Paulo"
-                android:textColor="@color/white"
-                android:textSize="18sp"
+                android:textColor="@color/material_dynamic_secondary99"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
         </LinearLayout>
@@ -141,33 +146,41 @@
             android:orientation="horizontal">
 
 
-            <CheckBox
-                android:id="@+id/barbeiro3"
+            <RadioButton
+                android:id="@+id/tecnico3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="false" />
 
             <TextView
+                android:id="@+id/text_nomeTecnico3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Junior Pressato"
-                android:textColor="@color/white"
-                android:textSize="18sp"
+                android:text="Lilian Cavalcanti"
+                android:textColor="@color/material_dynamic_secondary99"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
         </LinearLayout>
 
-        <Button
-            android:id="@+id/btAgendar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="40dp"
-            android:background="@drawable/background"
-            android:text="Agendar"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            app:cornerRadius="15dp" />
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/bt_finaliza"
+            style="@style/Button"
+            android:layout_marginTop="16dp"
+            android:text="Finalizar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.3"
+            app:layout_constraintStart_toStartOf="parent" />
 
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/bt_seguinte"
+            style="@style/Button"
+            android:layout_margin="34dp"
+            android:layout_marginTop="20dp"
+            android:text="Seguinte"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.3"
+            app:layout_constraintStart_toStartOf="parent" />
 
     </LinearLayout>
 </ScrollView>

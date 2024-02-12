@@ -17,7 +17,6 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
@@ -92,7 +91,7 @@ public class RegistraChamado extends AppCompatActivity {
 
         String pessoa = FirebaseAuth.getInstance().getCurrentUser().getEmail();
         usuarioID = FirebaseAuth.getInstance().getCurrentUser().getUid();
-       // FirebaseUser currentUser = mAuth.getCurrentUser();
+        // FirebaseUser currentUser = mAuth.getCurrentUser();
 
         DocumentReference documentReference = db.collection("Usuários").document(usuarioID);
         documentReference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
