@@ -1,19 +1,20 @@
 package com.example.projetofirebase3.view;
 
-import android.content.Intent;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
+import android.widget.DatePicker;
+import android.widget.TextView;
+import android.widget.TimePicker;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.projetofirebase3.Pessoa;
 import com.example.projetofirebase3.R;
-import com.example.projetofirebase3.RegistraChamado;
-import com.example.projetofirebase3.Servico;
+import com.example.projetofirebase3.databinding.ActivityAgendamentoBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -28,8 +29,6 @@ import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 
-import org.checkerframework.checker.nullness.qual.NonNull;
-
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
@@ -37,49 +36,75 @@ import java.util.Map;
 import javax.annotation.Nullable;
 
 public class Agendamento extends AppCompatActivity {
-   /* private Button bt_agendar, bt_seguinte;
+    private Button bt_agenda, bt_seguinte;
 
-    private EditText edit_data, edit_hora, edit_profissional, edit_tecnico1, edit_tecnico2, edit_tecnico3, edit_dia, edit_mes, edit_nome;
+    private TextView text_data, text_hora, text_nomeTecnico1, text_nomeTecnico2, text_nomeTecnico3, text_dia, text_mes;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     private DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("agenda");
     private Calendar calendar = Calendar.getInstance();
-    private String data = "";
-    private String hora = "";
-    private String year = "";
+    private Integer data = Integer.valueOf("");
+    private Integer hora = Integer.valueOf("");
+    private Integer year = Integer.valueOf("");
     private Integer monthOfYear = Integer.valueOf("");
     private Integer dayOfMonth = Integer.valueOf("");
     String[] mensagens = {"Preencha todos os campos.", "Foi agendado com sucesso."};
-    String usuarioID;*/
+    String usuarioID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_agendamento);
 
-        /*IniciarComponentes();
+        IniciarComponentes();
 
-        // Aqui que vai para outra tela de "AGENDAMENTO".
+        ActivityAgendamentoBinding binding = ActivityAgendamentoBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+        String nome = getIntent().getExtras().getString("nome", "").toString();
+        DatePicker datePicker = binding.datePicket;
+        Calendar calendar = Calendar.getInstance();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            datePicker.setOnDateChangedListener(new DatePicker.OnDateChangedListener() {
+                @Override
+                public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                    calendar.set(Calendar.YEAR, year);
+                    calendar.set(Calendar.MONTH, monthOfYear);
+                    calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                    String dia = dayOfMonth < 10 ? "0" + dayOfMonth : Integer.toString(dayOfMonth);
+                    String mes = monthOfYear < 9 ? "0" + (monthOfYear + 1) : Integer.toString(monthOfYear + 1);
+                    String data = dia + " / " + mes + " / " + year;
+                }
+            });
+        }
+
+        TimePicker timePicker = binding.timePicker;
+        timePicker.setOnTimeChangedListener(new TimePicker.OnTimeChangedListener() {
+            @Override
+            public void onTimeChanged(TimePicker view, int hourOfDay, int minute) {
+                String minuto = minute < 10 ? "0" + minute : Integer.toString(minute);
+                String hora = hourOfDay + ":" + minuto;
+            }
+        });
+        timePicker.setIs24HourView(true);
+
         bt_seguinte.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Agendamento.this, Servico.class);
-                startActivity(intent);
+
             }
         });
 
-        // Aqui que vai finalizar o pedido de manutenção na máquina "Computador"....
-        bt_agendar.setOnClickListener(new View.OnClickListener() {
+        bt_agenda.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //FirebaseAuth.getInstance().signOut();
-                String nomePessoa = edit_nomePessoa.getText().toString(); // 1
-                String nomeSetor = edit_nomeSetor.getText().toString(); // 2
-                String siglaSetor = edit_siglaSetor.getText().toString(); // 3
-                String material = edit_material.getText().toString(); // 4
-                String problema = edit_problema.getText().toString(); // 5
-                String quantidade = edit_quantidade.getText().toString(); // 5
 
-                if (nomePessoa.isEmpty() || nomeSetor.isEmpty() || siglaSetor.isEmpty() || material.isEmpty() || problema.isEmpty() || quantidade.isEmpty()) {
+                FirebaseAuth.getInstance().signOut();
+                String data = text_data.getText().toString();
+                String hora = text_hora.getText().toString();
+                String nomeTecnico1 = text_nomeTecnico1.getText().toString();
+                String nomeTecnico2 = text_nomeTecnico2.getText().toString();
+                String nomeTecnico3 = text_nomeTecnico3.getText().toString();
+
+                if (data.isEmpty() || hora.isEmpty() || nomeTecnico1.isEmpty() || nomeTecnico2.isEmpty() || nomeTecnico3.isEmpty()) {
                     Snackbar snackbar = Snackbar.make(v, mensagens[0], Snackbar.LENGTH_SHORT);
                     snackbar.setBackgroundTint(Color.WHITE);
                     snackbar.setTextColor(Color.BLACK);
@@ -91,25 +116,29 @@ public class Agendamento extends AppCompatActivity {
                     snackbar.setTextColor(Color.BLACK);
                     snackbar.show();
                 }
+
             }
         });
     }
 
-    // Aqui que vai mostrar o e-mail do usuário que está cadastrado....
-    @Override
     protected void onStart() {
         super.onStart();
 
-        String pessoa = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+        String agenda = FirebaseAuth.getInstance().getCurrentUser().getEmail();
         usuarioID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        // FirebaseUser currentUser = mAuth.getCurrentUser();
 
         DocumentReference documentReference = db.collection("Usuários").document(usuarioID);
         documentReference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
             @Override
             public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException error) {
                 if (documentSnapshot != null) {
-                    edit_nomePessoa.setText(documentSnapshot.getString("nome"));
-                    edit_nomePessoa.setText(pessoa);
+                    text_nomeTecnico1.setText(documentSnapshot.getString("nome"));
+                    text_nomeTecnico1.setText(agenda);
+                    text_nomeTecnico2.setText(documentSnapshot.getString("nome"));
+                    text_nomeTecnico2.setText(agenda);
+                    text_nomeTecnico3.setText(documentSnapshot.getString("nome"));
+                    text_nomeTecnico3.setText(agenda);
                 }
             }
         });
@@ -117,30 +146,30 @@ public class Agendamento extends AppCompatActivity {
 
     // Aqui vai salvar os dados do usuário...
     private void CadastrarUsuario(View v) {
-        String nomePessoa = edit_nomePessoa.getText().toString(); // 1
-        String nomeSetor = edit_nomeSetor.getText().toString(); // 2
-        String siglaSetor = edit_siglaSetor.getText().toString(); // 3
-        String material = edit_material.getText().toString(); // 4
-        String problema = edit_problema.getText().toString(); // 5
-        String quantidade = edit_quantidade.getText().toString(); // 6
 
-        System.out.println("Numeração " + nomePessoa + nomeSetor + siglaSetor + material + problema + quantidade);
+        String data = text_data.getText().toString();
+        String hora = text_hora.getText().toString();
+        String nomeTecnico1 = text_nomeTecnico1.getText().toString();
+        String nomeTecnico2 = text_nomeTecnico2.getText().toString();
+        String nomeTecnico3 = text_nomeTecnico3.getText().toString();
+
+        System.out.println("Nome dos Técnicos: " + data + hora + nomeTecnico1 + nomeTecnico2 + nomeTecnico3);
 
         // Criar um ID único para a pessoa no Firebase
         String usuarioID = databaseReference.push().getKey();
-        Pessoa pessoa = new Pessoa(nomePessoa, nomeSetor, siglaSetor, material, problema, quantidade);
+        Agenda agenda = new Agenda(data, hora, nomeTecnico1, nomeTecnico2, nomeTecnico3);
 
-        databaseReference.child(usuarioID).setValue(pessoa).addOnCompleteListener(new OnCompleteListener<Void>() {
-
+        databaseReference.child(usuarioID).setValue(agenda).addOnCompleteListener(new OnCompleteListener<Void>() {
 
             @Override
             public void onComplete(@NonNull Task<Void> task) {
-                Log.d("chamada", "Deus me Ajuda" + pessoa.getNomePessoa()); // 1
+                Log.d("chamada", "Deus me Ajuda" + agenda.getTecnico1()); // 1
+                Log.d("chamada", "Deus me Ajuda" + agenda.getTecnico2()); // 2
+                Log.d("chamada", "Deus me Ajuda" + agenda.getTecnico3()); // 3
 
                 if (task.isSuccessful()) {
                     Log.d("entrou", "entrou " + task.isSuccessful());
                     SalvarDadosUsuario();
-
 
                 } else {
                     String erro;
@@ -148,7 +177,6 @@ public class Agendamento extends AppCompatActivity {
                         throw task.getException();
 
                     } catch (Exception e) {
-
                         erro = "Erro ao não preencher as todas as tabelas.";
                     }
                     Snackbar snackbar = Snackbar.make(v, erro, Snackbar.LENGTH_SHORT);
@@ -162,12 +190,19 @@ public class Agendamento extends AppCompatActivity {
 
     // Aqui que vai salvar os dados do usuário que vai relatar os problemas do computador por sistema "Aplicativo"....
     private void SalvarDadosUsuario() {
-        String nomePessoa = edit_nomePessoa.getText().toString();
+        String data = text_data.getText().toString();
+        String hora = text_hora.getText().toString();
+        String dia = text_dia.getText().toString();
+        String mes = text_mes.getText().toString();
+        String tecnico1 = text_nomeTecnico1.getText().toString();
+        String tecnico2 = text_nomeTecnico2.getText().toString();
+        String tecnico3 = text_nomeTecnico3.getText().toString();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         Map<String, Object> usuarios = new HashMap<>();
-        usuarios.put("nomePessoa, nomeSetor, setor, sigla, material, problema, quantidade", nomePessoa);
+        usuarios.put("data, hora, dia, mes", tecnico1 + tecnico2 + tecnico3);
 
         DocumentReference documentReference = db.collection("Usuários").document(usuarioID);
+
         documentReference.set(usuarios).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void oVoid) {
@@ -183,10 +218,13 @@ public class Agendamento extends AppCompatActivity {
                 });
     }
 
-    // Aqui que inicia tudo, as telas como foi criadas e até o fim....
     private void IniciarComponentes() {
 
-        bt_seguinte = findViewById(R.id.seguinte);
-        bt_agendar = findViewById(R.id.bt_agendar);*/
+        text_data = findViewById(R.id.text_data);
+        text_hora = findViewById(R.id.text_hora);
+        bt_agenda = findViewById(R.id.bt_agenda);
+        bt_seguinte = findViewById(R.id.bt_seguinte);
+
+
     }
 }

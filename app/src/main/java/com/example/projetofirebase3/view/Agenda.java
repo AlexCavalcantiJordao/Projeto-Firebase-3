@@ -10,10 +10,10 @@ import com.google.firebase.database.ValueEventListener;
 
 public class Agenda {
 
-    private Integer data;
-    private Integer hora;
-    private Integer mes;
-    private Integer dia;
+    private String data;
+    private String hora;
+    private String mes;
+    private String dia;
     private String tecnico1;
     private String tecnico2;
     private String tecnico3;
@@ -22,28 +22,28 @@ public class Agenda {
     public Agenda() {
 
     }
-    public Agenda(Integer data, Integer hora, Integer dia, Integer mes, String nome ,String tecnico1, String tecnico2, String tecnico3){
+    public Agenda(String data, String hora, String dia, String mes , String nome){
 
-        this.data = Integer.valueOf(data);
-        this.hora = Integer.valueOf(hora);
+        this.data = String.valueOf(Integer.valueOf(data));
+        this.hora = String.valueOf(Integer.valueOf(hora));
         this.tecnico1 = tecnico1;
         this.tecnico2 = tecnico2;
         this.tecnico3 = tecnico3;
-        this.mes = mes;
+        this.mes = String.valueOf(mes);
         this.dia = dia;
         this.nome = nome;
 
     }
 
     public String getValue() {
-        return data + hora + tecnico1 + tecnico2 + tecnico3 + mes + dia + nome;
+        return data + hora + mes + dia + tecnico1 + tecnico2 + tecnico3 + nome;
     }
 
-    public Integer getData() {
+    public String getData() {
         return data;
     }
 
-    public Integer getHora() {
+    public String getHora() {
         return hora;
     }
 
@@ -59,11 +59,11 @@ public class Agenda {
         return tecnico3;
     }
 
-    public Integer getDia() {
+    public String getDia() {
         return dia;
     }
 
-    public Integer getMes() {
+    public String getMes() {
         return mes;
     }
 

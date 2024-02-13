@@ -15,6 +15,7 @@
         tools:context=".view.Agendamento">
 
         <TextView
+            android:id="@+id/text_agendamento"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="40dp"
@@ -86,6 +87,7 @@
             android:textStyle="bold" />
 
         <LinearLayout
+            android:id="@+id/text_nomeTecnico1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
@@ -101,7 +103,6 @@
                 android:checked="false" />
 
             <TextView
-                android:id="@+id/text_nomeTecnico1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Alex Fonseca"
@@ -112,6 +113,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/text_tecnico2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
@@ -121,13 +123,11 @@
 
 
             <RadioButton
-                android:id="@+id/tecnico2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="false" />
 
             <TextView
-                android:id="@+id/text_nomeTecnico2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Pedro Paulo"
@@ -138,6 +138,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/text_tecnico3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
@@ -147,13 +148,11 @@
 
 
             <RadioButton
-                android:id="@+id/tecnico3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="false" />
 
             <TextView
-                android:id="@+id/text_nomeTecnico3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Lilian Cavalcanti"
@@ -164,10 +163,10 @@
         </LinearLayout>
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/bt_finaliza"
+            android:id="@+id/bt_agenda"
             style="@style/Button"
             android:layout_marginTop="16dp"
-            android:text="Finalizar"
+            android:text="Agendar"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.3"
             app:layout_constraintStart_toStartOf="parent" />
