@@ -1,8 +1,11 @@
 package com.example.projetofirebase3.view;
 
+import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
+
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -13,19 +16,25 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.projetofirebase3.R;
 import com.example.projetofirebase3.databinding.ActivityAgendamentoBinding;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+
 public class Agendamento extends AppCompatActivity {
 
-    private Button bt_agenda;
+    private Button btAgenda;
     private ActivityAgendamentoBinding binding;
     private String data = "";
     private String hora = "";
+    private String Agenda;
     private final Calendar calendar = Calendar.getInstance();
+
+    String usuarioID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +68,7 @@ public class Agendamento extends AppCompatActivity {
             if (hora.isEmpty()) {
                 mensagem(view, "Preencha o horário", "#FF0000");
             } else if (hora.compareTo("8:00") < 0 || hora.compareTo("17:00") > 0) {
-                mensagem(view, "Suporte Técnico não está em funcionamento - horário é 08 Horas : 00 minutos ás 17 Horas : 00 minutos", "#FF0000");
+                mensagem(view, "Suporte Técnico não está em funcionamento - horário é das 08 Horas : 00 minutos ás 17 Horas : 00 minutos.", "#FF0000");
             } else if (data.isEmpty()) {
                 mensagem(view, "Coloque uma data", "#FF0000");
             } else if (tecnico1 && !data.isEmpty() && !hora.isEmpty()) {
@@ -81,19 +90,26 @@ public class Agendamento extends AppCompatActivity {
         snackbar.show();
     }
 
-    private void salvarAgendamento(View view, String cliente, String agenda, String data, String hora) {
+    private void salvarAgendamento(View view, String tecnico1, String tecnico2, String tecnico3, String agenda) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        Map<String, Object> dadosUsuario = new HashMap<>();
-        dadosUsuario.put("cliente", cliente);
-        dadosUsuario.put("Técnico", agenda);
-        dadosUsuario.put("data", data);
-        dadosUsuario.put("hora", hora);
-        db.collection("Agendamento").document(cliente).set(dadosUsuario).addOnCompleteListener(task -> {
+        String Agenda = btAgenda.getText().toString();
+        Map<String, Object> usuarioID = new HashMap<>();
+        usuarioID.put("nome", "Nome do Cliente");
+        usuarioID.put("email", "email@cliente.com");
+        usuarioID.put("técnico1", tecnico1);
+        usuarioID.put("técnico2", tecnico2);
+        usuarioID.put("técnico3", tecnico3);
+        usuarioID.put("agenda", agenda);
+        usuarioID.put("data", new Timestamp(new Date()));
+
+        db.collection("Agendamento").document(agenda).set(usuarioID).addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
-                mensagem(view, "Agendamento realizado com sucesso !", "#FF03DAC5");
+                mensagem(view, "Agendamento realizado com sucesso !", "#FFFAF0");
+                Log.d(TAG, "DocumentSnapshot successfully written!");
             }
         }).addOnFailureListener(e -> {
             mensagem(view, "Erro no servidor !", "#FF0000");
+            Log.w(TAG, "Error writing document", e);
         });
     }
 }
