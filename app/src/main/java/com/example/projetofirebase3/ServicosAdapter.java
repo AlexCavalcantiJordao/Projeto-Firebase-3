@@ -1,4 +1,4 @@
-package com.example.projetofirebase3.adapter;
+package com.example.projetofirebase3;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,7 +8,6 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.projetofirebase3.databinding.ServicosItemBinding;
-import com.example.projetofirebase3.model.Servicos;
 
 import java.util.List;
 

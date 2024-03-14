@@ -1,4 +1,5 @@
-package com.example.projetofirebase3.view;
+
+package com.example.projetofirebase3;
 
 import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
 
@@ -10,15 +11,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.TimePicker;
-
 import androidx.appcompat.app.AppCompatActivity;
-
-import com.example.projetofirebase3.R;
 import com.example.projetofirebase3.databinding.ActivityAgendamentoBinding;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.FirebaseFirestore;
-
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -27,7 +24,7 @@ import java.util.Map;
 
 public class Agendamento extends AppCompatActivity {
 
-    private Button btAgenda;
+    private Button btAgendar;
     private ActivityAgendamentoBinding binding;
     private String data = "";
     private String hora = "";
@@ -61,7 +58,7 @@ public class Agendamento extends AppCompatActivity {
             hora = hourOfDay + ":" + minuto;
         });
         timePicker.setIs24HourView(true);
-        binding.btAgenda.setOnClickListener(view -> {
+        binding.btAgendar.setOnClickListener(view -> {
             boolean tecnico1 = binding.tecnico1.isChecked();
             boolean tecnico2 = binding.tecnico2.isChecked();
             boolean tecnico3 = binding.tecnico3.isChecked();
@@ -92,7 +89,7 @@ public class Agendamento extends AppCompatActivity {
 
     private void salvarAgendamento(View view, String tecnico1, String tecnico2, String tecnico3, String agenda) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        String Agenda = btAgenda.getText().toString();
+        String Agenda = btAgendar.getText().toString();
         Map<String, Object> usuarioID = new HashMap<>();
         usuarioID.put("nome", "Nome do Cliente");
         usuarioID.put("email", "email@cliente.com");

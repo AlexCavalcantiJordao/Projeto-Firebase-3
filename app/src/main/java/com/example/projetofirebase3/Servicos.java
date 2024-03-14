@@ -1,4 +1,4 @@
-package com.example.projetofirebase3.model;
+package com.example.projetofirebase3;
 
 import java.util.Objects;
 

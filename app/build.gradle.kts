@@ -4,6 +4,7 @@ plugins {
     // Adicione a dependência para o plug-in Gradle do Performance Monitoring
     id("com.google.firebase.firebase-perf") version "1.4.2" apply false
     // Adicione o plug-in Gradle de monitoramento de desempenho
+
 }
 
 android {
@@ -46,11 +47,11 @@ dependencies {
     implementation("androidx.annotation:annotation:1.7.1")
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.7.0")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")
-    implementation("com.google.firebase:firebase-database:20.3.0")
+    implementation("com.google.firebase:firebase-database:20.3.1")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
-    implementation(platform("com.google.firebase:firebase-bom:32.7.1"))
+    implementation(platform("com.google.firebase:firebase-bom:32.7.4"))
     implementation("com.google.firebase:firebase-analytics")
     implementation("com.google.firebase:firebase-auth-ktx")
     implementation("com.google.firebase:firebase-firestore-ktx")
@@ -60,10 +61,10 @@ dependencies {
     implementation("com.google.firebase:firebase-database")
 
     // Importe a BoM para a plataforma Firebase
-    implementation(platform("com.google.firebase:firebase-bom:32.7.1"))
+    implementation(platform("com.google.firebase:firebase-bom:32.7.4"))
 
     //Importa a BoM para a plataforma Firebase
-    implementation(platform("com.google.firebase:firebase-bom:32.7.1"))
+    implementation(platform("com.google.firebase:firebase-bom:32.7.4"))
 
     //Adiciona a dependência para a biblioteca do Performance Monitoring
     // Ao usar a BoM, você não especifica versões nas dependências da biblioteca do Firebase
@@ -75,9 +76,12 @@ dependencies {
     implementation("com.google.firebase:firebase-installations")
 
     //Importa a BoM para a plataforma Firebase
-    implementation(platform("com.google.firebase:firebase-bom:32.7.1"))
+    implementation(platform("com.google.firebase:firebase-bom:32.7.4"))
 
     //Adiciona a dependência para a biblioteca do Performance Monitoring
     // Ao usar a BoM, você não especifica versões nas dependências da biblioteca do Firebase
     implementation("com.google.firebase:firebase-perf")
+
+    // Import the BoM for the Firebase platform
+    implementation(platform("com.google.firebase:firebase-bom:32.7.4"))
 }

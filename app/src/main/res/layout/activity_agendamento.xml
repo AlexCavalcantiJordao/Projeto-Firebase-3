@@ -12,7 +12,7 @@
         android:layout_height="match_parent"
         android:background="@drawable/background"
         android:orientation="vertical"
-        tools:context=".view.Agendamento">
+        tools:context=".Agendamento">
 
         <TextView
             android:id="@+id/text_agendamento"
@@ -26,12 +26,13 @@
             android:textStyle="bold" />
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/edit_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:cardBackgroundColor="@color/black">
 
             <TextView
-                android:id="@+id/text_data"
+                android:id="@+id/edit_data"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
@@ -57,7 +58,7 @@
             app:cardBackgroundColor="@color/black">
 
             <TextView
-                android:id="@+id/text_hora"
+                android:id="@+id/edit_hora"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
@@ -77,6 +78,7 @@
             android:timePickerMode="spinner" />
 
         <TextView
+            android:id="@+id/edit_profissional"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
@@ -87,7 +89,7 @@
             android:textStyle="bold" />
 
         <LinearLayout
-            android:id="@+id/text_nomeTecnico1"
+            android:id="@+id/text_tecnico1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
@@ -139,6 +141,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/text_tecnico3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
@@ -164,7 +167,7 @@
         </LinearLayout>
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btAgenda"
+            android:id="@+id/btAgendar"
             style="@style/Button"
             android:layout_marginTop="16dp"
             android:text="Agendar"

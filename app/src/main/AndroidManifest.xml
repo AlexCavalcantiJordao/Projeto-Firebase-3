@@ -16,7 +16,7 @@
             android:name=".Servico"
             android:exported="false" />
         <activity
-            android:name=".view.Agendamento"
+            android:name=".Agendamento"
             android:exported="false" />
         <activity
             android:name=".TelaPrincipal"

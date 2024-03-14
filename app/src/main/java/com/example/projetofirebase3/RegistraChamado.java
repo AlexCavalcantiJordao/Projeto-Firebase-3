@@ -10,7 +10,6 @@ import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.projetofirebase3.view.Agendamento;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -119,6 +118,7 @@ public class RegistraChamado extends AppCompatActivity {
         // Criar um ID único para a pessoa no Firebase
         String usuarioID = databaseReference.push().getKey();
         Pessoa pessoa = new Pessoa(nomePessoa, nomeSetor, siglaSetor, material, problema, quantidade);
+
 
         databaseReference.child(usuarioID).setValue(pessoa).addOnCompleteListener(new OnCompleteListener<Void>() {
 
