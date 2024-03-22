@@ -10,6 +10,12 @@ import com.google.firebase.database.ValueEventListener;
 
 public class Tecnico {
 
+    private String nome;
+    private String data;
+    private String hora;
+    private String dia;
+    private String minutos;
+    private String mes;
     private String tecnico1;
     private String tecnico2;
     private String tecnico3;

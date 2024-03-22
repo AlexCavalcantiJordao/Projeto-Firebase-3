@@ -8,38 +8,35 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class Agenda {
+public class Agenda { // + data + hora + minutos + mes + nome + tecnico + tecnico1 + tecnico2 + tecnico3
+
     private String data;
     private String hora;
     private String minutos;
     private String mes;
     private String nome;
-    private String tecnico;
     private Boolean tecnico1;
     private Boolean tecnico2;
     private Boolean tecnico3;
 
-    public Agenda() {
+    public Agenda(String data, String hora, String nome) {
 
     }
 
-    public Agenda(String data, String hora, String minutos, String mes, String nome, String tecnico , boolean tecnico1, boolean tecnico2, boolean tecnico3) {
+    public Agenda(String data, String hora, String minutos, String mes, String nome, String tecnico, Boolean tecnico1, Boolean tecnico2, Boolean tecnico3) {
 
         this.data = data;
         this.hora = hora;
         this.minutos = minutos;
         this.mes = mes;
         this.nome = nome;
-        this.tecnico = tecnico;
         this.tecnico1 = tecnico1;
         this.tecnico2 = tecnico2;
         this.tecnico3 = tecnico3;
-        // + data + hora + minutos + mes + nome + tecnico + tecnico1 + tecnico2 + tecnico3
-
     }
 
     public String getValue() {
-        return data + hora + minutos + mes + nome + tecnico + tecnico1 + tecnico2 + tecnico3;
+        return data + hora + minutos + mes + nome + tecnico1 + tecnico2 + tecnico3;
     }
 
     public String getData() {
@@ -79,7 +76,6 @@ public class Agenda {
 
     // Função para gravar um objeto Dados no banco de dados firabase....
     public void SalvarDadosUsuario(Agenda agenda) {
-
         String key = database.getKey();
         database.child("agenda").push().getKey();
         // Gravar o objeto Dados no banco de dados firebase sob a chave gerada....
@@ -103,21 +99,21 @@ public class Agenda {
                     Agenda agenda = snapshot.getValue(Agenda.class);
 
                     // Fazer algo com o objetos Dados, como imprimir na tela....
-
-                    System.out.println(agenda.getData()); // data
-                    System.out.println(agenda.getHora()); // hora
-                    System.out.println(agenda.getMes()); //  mes
-                    System.out.println(agenda.getMinutos()); // minutos
-                    System.out.println(agenda.getNome()); // Nome
-                    System.out.println(agenda.getTecnico1()); // tecnico1
-                    System.out.println(agenda.getTecnico2()); // tecnico2
-                    System.out.println(agenda.getTecnico3()); // tecnico3
+                    System.out.println(agenda.getData());
+                    System.out.println(agenda.getHora());
+                    System.out.println(agenda.getMinutos());
+                    System.out.println(agenda.getMes());
+                    System.out.println(agenda.getNome());
+                    System.out.println(agenda.getTecnico1());
+                    System.out.println(agenda.getTecnico2());
+                    System.out.println(agenda.getTecnico3());
                     System.out.println("-------------------------------");
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
+
                 // Tratar o erro de leitura dos dados....
                 System.out.println("Falha ao ler os dados.");
                 databaseError.getMessage();

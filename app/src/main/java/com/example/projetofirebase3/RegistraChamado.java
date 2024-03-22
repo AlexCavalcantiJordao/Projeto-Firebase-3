@@ -59,7 +59,7 @@ public class RegistraChamado extends AppCompatActivity {
         bt_finaliza.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FirebaseAuth.getInstance().signOut();
+                FirebaseAuth.getInstance().signOut(); // Isso faz para sair do aplicativo....
                 String nomePessoa = edit_nomePessoa.getText().toString(); // 1
                 String nomeSetor = edit_nomeSetor.getText().toString(); // 2
                 String siglaSetor = edit_siglaSetor.getText().toString(); // 3
@@ -121,7 +121,7 @@ public class RegistraChamado extends AppCompatActivity {
 
 
         databaseReference.child(usuarioID).setValue(pessoa).addOnCompleteListener(new OnCompleteListener<Void>() {
-
+            // Estou AQUI
 
             @Override
             public void onComplete(@NonNull Task<Void> task) {

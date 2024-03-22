@@ -14,13 +14,14 @@ public class Tecnico1 {
     private String hora;
     private String dia;
     private String minutos;
+    private String tecnico;
     private String mes;
 
     public Tecnico1() {
 
     }
 
-    public Tecnico1(String data, String hora, String dia, String minutos, String mes, String nome) {
+    public Tecnico1(String data, String hora, String dia, String minutos, String mes, String nome, String tecnico) {
 
         this.nome = nome;
         this.data = data;
@@ -28,12 +29,13 @@ public class Tecnico1 {
         this.dia = dia;
         this.minutos = minutos;
         this.mes = mes;
+        this.tecnico = tecnico;
 
     }
 
     public String getValue() {
 
-        return nome + data + hora + dia + minutos + mes;
+        return nome + data + hora + dia + minutos + mes + tecnico;
     }
 
     public String getNome() {
@@ -58,6 +60,9 @@ public class Tecnico1 {
 
     String getMes() {
         return mes;
+    }
+    String getTecnico(){
+        return tecnico;
     }
 
     // Criar uma referência ao banco de dados firebase....
@@ -95,6 +100,7 @@ public class Tecnico1 {
                     System.out.println(tecnico1.getMinutos());
                     System.out.println(tecnico1.getMes());
                     System.out.println(tecnico1.getNome());
+                    System.out.println(tecnico1.getTecnico());
                     System.out.println("-------------------------------");
                 }
             }

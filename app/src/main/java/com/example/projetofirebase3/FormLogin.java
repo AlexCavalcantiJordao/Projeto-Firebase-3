@@ -81,7 +81,7 @@ public class FormLogin extends AppCompatActivity {
                         public void run() {
                             RegistraChamado();
                         }
-                    }, 2000);
+                    }, 100);
                 } else {
                     String erro;
 
